@@ -9,6 +9,7 @@ import jakarta.persistence.Table;
 public class Lecture extends BaseEntity {
 
     private String name;
+    private String professor;
     private long maxCapacity;
     private long currentCapacity;
 }
