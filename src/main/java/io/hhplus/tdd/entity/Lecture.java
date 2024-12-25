@@ -5,9 +5,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "student")
-public class Student extends BaseEntity {
+@Table(name = "lecture")
+public class Lecture extends BaseEntity {
 
     private String name;
-    private long totLectureJoin;
+    private long maxCapacity;
+    private long currentCapacity;
 }
