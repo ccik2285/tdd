@@ -28,8 +28,8 @@ public class LectureRepository implements LectureRepositoryCustom{
     }
 
     @Override
-    public Optional<Lecture> findByIdLectureId(long lectureId) {
-        return jpaLectureRepository.findById(lectureId);
+    public Optional<Lecture> findByIdLectureIdWithLock(long lectureId) {
+        return jpaLectureRepository.findByIdLectureIdWithLock(lectureId);
     }
 
     @Override

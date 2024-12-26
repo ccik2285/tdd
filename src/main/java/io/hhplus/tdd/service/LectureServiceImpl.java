@@ -31,7 +31,7 @@ public class LectureServiceImpl implements LectureService{
     public void registLecture(long lectureId,long studentId) {
 
         //lectureId,studentId로 먼저 조회
-        Optional<Lecture> optionalLecture = lectureRepository.findByIdLectureId(lectureId);
+        Optional<Lecture> optionalLecture = lectureRepository.findByIdLectureIdWithLock(lectureId);
         Optional<Student> optionalStudent = lectureRepository.findByIdStudentId(studentId);
         List<LectureJoin> lectureJoinList = lectureRepository.findAllByStudentIdAndLectureId(lectureId,studentId);
 
@@ -49,7 +49,6 @@ public class LectureServiceImpl implements LectureService{
         lectureValidator.validateLectureCapacity(lecture);
         lectureValidator.validateLectureJoin(lectureJoinList);
 
-        // LectureJoin 생성 및 저장
         Student student = Student.createStudent(studentInfo.getName(),studentInfo.getTotLectureJoin());
         LectureJoin lectureJoin = LectureJoin.createLectureJoin(student, lecture, StateCd.REGISTERED);
         lectureRepository.saveLectureJoin(lectureJoin);
@@ -68,7 +67,7 @@ public class LectureServiceImpl implements LectureService{
         List<LectureJoin> lectures = lectureRepository.findAllByStudentIdAndStateCd(userid,StateCd.REGISTERED);
         return lectures.stream()
                 .map(mp -> {
-                    Lecture lecture = lectureRepository.findByIdLectureId(mp.getLecture().getId())
+                    Lecture lecture = lectureRepository.findByIdLectureIdWithLock(mp.getLecture().getId())
                             .orElseThrow(() -> new RuntimeException("Lecture not found"));
                     return new LectureJoinedResponse(
                             lecture.getId(),
@@ -78,7 +77,5 @@ public class LectureServiceImpl implements LectureService{
                 })
                 .collect(Collectors.toList());
     }
-
-
 
 }
