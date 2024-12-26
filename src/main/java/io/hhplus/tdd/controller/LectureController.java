@@ -33,9 +33,9 @@ public class LectureController {
         return ResponseEntity.ok(lectureService.getAvailableList(dateparam));
     }
 
-    @GetMapping("/registerd-lectures")
-    public List<LectureJoinedResponse> getregisteredlectures() {
-        return List.of();
+    @GetMapping("/registerd-lectures/{studentId}")
+    public ResponseEntity<List<LectureJoinedResponse>> getregisteredlectures(@PathVariable long studentId) {
+        return ResponseEntity.ok(lectureService.getRegisteredLectures(studentId));
     }
 
 

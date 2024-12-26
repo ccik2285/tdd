@@ -11,9 +11,9 @@ import java.util.Optional;
 
 public interface LectureRepositoryCustom {
     List<LectureJoin> findAllByStudentIdAndLectureId(long studentId, long lectureId);
-    public Optional<Lecture> findByIdLectureId(long lectureId);
-    public Optional<Student> findByIdStudentId(long studentId);
-    public void saveLectureJoin(LectureJoin lectureJoin);
+    Optional<Lecture> findByIdLectureId(long lectureId);
+    Optional<Student> findByIdStudentId(long studentId);
+    void saveLectureJoin(LectureJoin lectureJoin);
     List<Lecture> findByLectureDateAndCurrentCapacityLessThan(LocalDate date, long capacity);
     List<LectureJoin> findAllByStudentIdAndStateCd(long studentId, StateCd stateCd);
 }

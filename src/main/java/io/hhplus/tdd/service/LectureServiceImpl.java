@@ -79,12 +79,6 @@ public class LectureServiceImpl implements LectureService{
                 .collect(Collectors.toList());
     }
 
-    /*
-    @Override
-    public void searchMyLectureList() {
-
-    }
-    */
 
 
 }
