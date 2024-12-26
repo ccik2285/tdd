@@ -1,5 +1,6 @@
 package io.hhplus.tdd.infrastructure;
 
+import io.hhplus.tdd.common.StateCd;
 import io.hhplus.tdd.entity.Lecture;
 import io.hhplus.tdd.entity.LectureJoin;
 import io.hhplus.tdd.entity.Student;
@@ -14,4 +15,5 @@ public interface LectureRepositoryCustom {
     public Optional<Student> findByIdStudentId(long studentId);
     public void saveLectureJoin(LectureJoin lectureJoin);
     List<Lecture> findByLectureDateAndCurrentCapacityLessThan(LocalDate date, long capacity);
+    List<LectureJoin> findAllByStudentIdAndStateCd(long studentId, StateCd stateCd);
 }

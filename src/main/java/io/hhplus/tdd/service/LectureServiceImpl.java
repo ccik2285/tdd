@@ -1,6 +1,7 @@
 package io.hhplus.tdd.service;
 
 import io.hhplus.tdd.common.StateCd;
+import io.hhplus.tdd.dto.LectureJoinedResponse;
 import io.hhplus.tdd.entity.Lecture;
 import io.hhplus.tdd.entity.LectureJoin;
 import io.hhplus.tdd.entity.Student;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -56,11 +58,25 @@ public class LectureServiceImpl implements LectureService{
     }
 
     @Override
-    public List<Lecture> getavailablelist(String dateParam) {
+    public List<Lecture> getAvailableList(String dateParam) {
         LocalDate date = LocalDate.parse(dateParam);
-        List<Lecture> availableLectures = lectureRepository.findByLectureDateAndCurrentCapacityLessThan(date,30);
+        return lectureRepository.findByLectureDateAndCurrentCapacityLessThan(date,30);
+    }
 
-        return availableLectures;
+    @Override
+    public List<LectureJoinedResponse> getRegisteredLectures(long userid) {
+        List<LectureJoin> lectures = lectureRepository.findAllByStudentIdAndStateCd(userid,StateCd.REGISTERED);
+        return lectures.stream()
+                .map(mp -> {
+                    Lecture lecture = lectureRepository.findByIdLectureId(mp.getLecture().getId())
+                            .orElseThrow(() -> new RuntimeException("Lecture not found"));
+                    return new LectureJoinedResponse(
+                            lecture.getId(),
+                            lecture.getName(),
+                            lecture.getProfessor()
+                    );
+                })
+                .collect(Collectors.toList());
     }
 
     /*

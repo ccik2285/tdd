@@ -1,5 +1,6 @@
 package io.hhplus.tdd.infrastructure;
 
+import io.hhplus.tdd.common.StateCd;
 import io.hhplus.tdd.entity.Lecture;
 import io.hhplus.tdd.entity.LectureJoin;
 import io.hhplus.tdd.entity.Student;
@@ -44,6 +45,11 @@ public class LectureRepository implements LectureRepositoryCustom{
     @Override
     public List<Lecture> findByLectureDateAndCurrentCapacityLessThan(LocalDate date, long capacity) {
         return jpaLectureRepository.findByLectureDateAndCurrentCapacityLessThan(date,capacity);
+    }
+
+    @Override
+    public List<LectureJoin> findAllByStudentIdAndStateCd(long studentId,StateCd stateCd) {
+        return jpaLectureJoinRepository.findAllByStudentIdAndStateCd(studentId, stateCd);
     }
 
 }

@@ -30,11 +30,11 @@ public class LectureController {
 
     @GetMapping("/available-lectures")
     public ResponseEntity<List<Lecture>> getavailablelist(@RequestParam("date") String dateparam) {
-        return ResponseEntity.ok(lectureService.getavailablelist(dateparam));
+        return ResponseEntity.ok(lectureService.getAvailableList(dateparam));
     }
 
     @GetMapping("/registerd-lectures")
-    public List<LectureJoinedResponse> registeredlectures() {
+    public List<LectureJoinedResponse> getregisteredlectures() {
         return List.of();
     }
 
