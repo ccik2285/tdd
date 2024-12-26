@@ -1,8 +1,9 @@
 package io.hhplus.tdd.infrastructure;
 
-import io.hhplus.tdd.entity.Student;
+import io.hhplus.tdd.entity.Lecture;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface JpaLectureRepository extends JpaRepository<Student,Long>{
+public interface JpaLectureRepository extends JpaRepository<Lecture,Long>{
+    Lecture findById();
 
 }

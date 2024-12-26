@@ -1,21 +1,39 @@
 package io.hhplus.tdd.entity;
 
-import io.hhplus.tdd.common.BaseEntity;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import io.hhplus.tdd.common.StateCd;
+import jakarta.persistence.*;
+import lombok.Builder;
+import lombok.Getter;
 
+@Builder
 @Entity
-public class LectureJoin extends BaseEntity {
+@Getter
+@Table(name = "lecturejoin")
+public class LectureJoin {
+    @EmbeddedId
+    private LectureJoinId id;
 
     @ManyToOne
-    @JoinColumn(name = "student_id")
+    @MapsId("studentId")
+    @JoinColumn(name = "studentId", insertable = false, updatable = false)
     private Student student;
 
     @ManyToOne
-    @JoinColumn(name = "lecutre_id")
+    @MapsId("lectureId")
+    @JoinColumn(name = "lectureId", insertable = false, updatable = false)
     private Lecture lecture;
 
-    private String stateCd;
+    @Enumerated(EnumType.STRING)
+    private StateCd stateCd;
+
+    public static LectureJoin createLectureJoin(Student student, Lecture lecture, StateCd stateCd) {
+        LectureJoinId id = new LectureJoinId(student.getId(), lecture.getId());
+        return LectureJoin.builder()
+                .id(id)
+                .student(student)
+                .lecture(lecture)
+                .stateCd(stateCd)
+                .build();
+    }
 
 }
