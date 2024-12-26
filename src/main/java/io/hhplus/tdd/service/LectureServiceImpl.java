@@ -8,6 +8,7 @@ import io.hhplus.tdd.infrastructure.LectureRepository;
 import io.hhplus.tdd.util.LectureValidator;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -54,15 +55,20 @@ public class LectureServiceImpl implements LectureService{
         lecture.increaseCapacity();
     }
 
+    @Override
+    public List<Lecture> getavailablelist(String dateParam) {
+        LocalDate date = LocalDate.parse(dateParam);
+        List<Lecture> availableLectures = lectureRepository.findByLectureDateAndCurrentCapacityLessThan(date,30);
+
+        return availableLectures;
+    }
+
     /*
     @Override
     public void searchMyLectureList() {
 
     }
+    */
 
-    @Override
-    public void searchAvailableLectures() {
-
-    } */
 
 }

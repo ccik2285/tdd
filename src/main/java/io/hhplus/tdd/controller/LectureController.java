@@ -1,12 +1,14 @@
 package io.hhplus.tdd.controller;
 
 
+import io.hhplus.tdd.entity.Lecture;
 import io.hhplus.tdd.service.LectureService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
+
 import java.util.List;
-import io.hhplus.tdd.dto.LectureResponse;
+
 import io.hhplus.tdd.dto.LectureJoinedResponse;
 
 @RestController
@@ -27,14 +29,12 @@ public class LectureController {
     }
 
     @GetMapping("/available-lectures")
-    public List<LectureResponse> availablelist() {
-
-        return List.of();
+    public ResponseEntity<List<Lecture>> getavailablelist(@RequestParam("date") String dateparam) {
+        return ResponseEntity.ok(lectureService.getavailablelist(dateparam));
     }
 
     @GetMapping("/registerd-lectures")
     public List<LectureJoinedResponse> registeredlectures() {
-
         return List.of();
     }
 

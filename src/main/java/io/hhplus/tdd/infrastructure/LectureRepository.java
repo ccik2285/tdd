@@ -5,6 +5,7 @@ import io.hhplus.tdd.entity.LectureJoin;
 import io.hhplus.tdd.entity.Student;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,11 +19,6 @@ public class LectureRepository implements LectureRepositoryCustom{
         this.jpaLectureRepository = jpaLectureRepository;
         this.jpaLectureJoinRepository = jpaLectureJoinRepository;
         this.jpaStudentRepository = jpaStudentRepository;
-    }
-
-    @Override
-    public void registLecture(LectureJoin lectureJoin) {
-        jpaLectureJoinRepository.save(lectureJoin);
     }
 
     @Override
@@ -41,9 +37,13 @@ public class LectureRepository implements LectureRepositoryCustom{
     }
 
     @Override
-    public LectureJoin saveLectureJoin(LectureJoin lectureJoin) {
-        return jpaLectureJoinRepository.save(lectureJoin);
+    public void saveLectureJoin(LectureJoin lectureJoin) {
+        jpaLectureJoinRepository.save(lectureJoin);
     }
 
+    @Override
+    public List<Lecture> findByLectureDateAndCurrentCapacityLessThan(LocalDate date, long capacity) {
+        return jpaLectureRepository.findByLectureDateAndCurrentCapacityLessThan(date,capacity);
+    }
 
 }
