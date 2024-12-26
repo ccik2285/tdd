@@ -49,6 +49,7 @@ public class LectureServiceImpl implements LectureService{
         lectureValidator.validateLectureCapacity(lecture);
         lectureValidator.validateLectureJoin(lectureJoinList);
 
+        // LectureJoin 생성 및 저장
         Student student = Student.createStudent(studentInfo.getName(),studentInfo.getTotLectureJoin());
         LectureJoin lectureJoin = LectureJoin.createLectureJoin(student, lecture, StateCd.REGISTERED);
         lectureRepository.saveLectureJoin(lectureJoin);

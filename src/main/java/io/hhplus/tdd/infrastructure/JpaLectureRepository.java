@@ -12,5 +12,5 @@ import java.util.Optional;
 public interface JpaLectureRepository extends JpaRepository<Lecture,Long>{
     List<Lecture> findByLectureDateAndCurrentCapacityLessThan(LocalDate date, long capacity);
     @Lock(LockModeType.PESSIMISTIC_WRITE)
-    Optional<Lecture> findByIdLectureIdWithLock(long lectureId);
+    Optional<Lecture> findById(long lectureId);
 }
