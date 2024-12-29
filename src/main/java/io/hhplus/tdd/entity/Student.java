@@ -6,15 +6,18 @@ import jakarta.persistence.Table;
 import lombok.Builder;
 import lombok.Getter;
 
-@Builder
+
 @Entity
 @Getter
+@lombok.NoArgsConstructor
 @Table(name = "student")
 public class Student extends BaseEntity {
 
     private String name;
     private long totLectureJoin;
 
+
+    @Builder
     public static Student createStudent(String name,long totLectureJoin) {
         return Student.builder()
                 .name(name)

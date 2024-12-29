@@ -22,9 +22,9 @@ public class LectureController {
     }
 
 
-    @PostMapping("/register/{lectureId}/{studentId}")
-    public ResponseEntity<String> registerlecture(@PathVariable long lectureId,@PathVariable long studentId) {
-        lectureService.registLecture(lectureId,studentId);
+    @PostMapping("/register/{lecture_id}/{student_id}")
+    public ResponseEntity<String> registerlecture(@PathVariable long lecture_id,@PathVariable long student_id) {
+        lectureService.registLecture(lecture_id,student_id);
         return new ResponseEntity<>("수강신청이 완료되었습니다.", HttpStatus.OK);
     }
 
@@ -33,9 +33,9 @@ public class LectureController {
         return ResponseEntity.ok(lectureService.getAvailableList(dateparam));
     }
 
-    @GetMapping("/registerd-lectures/{studentId}")
-    public ResponseEntity<List<LectureJoinedResponse>> getregisteredlectures(@PathVariable long studentId) {
-        return ResponseEntity.ok(lectureService.getRegisteredLectures(studentId));
+    @GetMapping("/registerd-lectures/{student_id}")
+    public ResponseEntity<List<LectureJoinedResponse>> getregisteredlectures(@PathVariable long student_id) {
+        return ResponseEntity.ok(lectureService.getRegisteredLectures(student_id));
     }
 
 

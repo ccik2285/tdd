@@ -23,18 +23,18 @@ public class LectureRepository implements LectureRepositoryCustom{
     }
 
     @Override
-    public List<LectureJoin> findAllByStudentIdAndLectureId(long studentId, long lectureId) {
-        return jpaLectureJoinRepository.findAllByStudentIdAndLectureId(studentId,lectureId);
+    public List<LectureJoin> findAllByStudentIdAndLectureId(long student_id, long lecture_id) {
+        return jpaLectureJoinRepository.findAllByStudentIdAndLectureId(student_id,lecture_id);
     }
 
     @Override
-    public Optional<Lecture> findByIdLectureIdWithLock(long lectureId) {
-        return jpaLectureRepository.findById(lectureId);
+    public Optional<Lecture> findByIdLectureIdWithLock(long lecture_id) {
+        return jpaLectureRepository.findById(lecture_id);
     }
 
     @Override
-    public Optional<Student> findByIdStudentId(long studentId) {
-        return jpaStudentRepository.findById(studentId);
+    public Optional<Student> findByIdStudentId(long student_id) {
+        return jpaStudentRepository.findById(student_id);
     }
 
     @Override
@@ -48,8 +48,8 @@ public class LectureRepository implements LectureRepositoryCustom{
     }
 
     @Override
-    public List<LectureJoin> findAllByStudentIdAndStateCd(long studentId,StateCd stateCd) {
-        return jpaLectureJoinRepository.findAllByStudentIdAndStateCd(studentId, stateCd);
+    public List<LectureJoin> findAllByStudentIdAndStateCd(long student_id,StateCd stateCd) {
+        return jpaLectureJoinRepository.findAllByStudentIdAndStateCd(student_id, stateCd);
     }
 
 }

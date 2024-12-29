@@ -8,5 +8,5 @@ import java.util.List;
 public interface LectureService {
     void registLecture(long lecture_id,long student_id);
     List<Lecture> getAvailableList(String dateParam);
-    List<LectureJoinedResponse> getRegisteredLectures(long studentId);
+    List<LectureJoinedResponse> getRegisteredLectures(long student_id);
 }

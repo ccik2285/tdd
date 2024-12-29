@@ -7,6 +7,7 @@ import io.hhplus.tdd.entity.LectureJoin;
 import io.hhplus.tdd.entity.Student;
 import io.hhplus.tdd.infrastructure.LectureRepository;
 import io.hhplus.tdd.util.LectureValidator;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -14,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-
+@Slf4j
 @Service
 public class LectureServiceImpl implements LectureService{
 
@@ -28,12 +29,12 @@ public class LectureServiceImpl implements LectureService{
 
 
     @Override
-    public void registLecture(long lectureId,long studentId) {
+    public void registLecture(long lecture_id,long student_id) {
 
         //lectureId,studentId로 먼저 조회
-        Optional<Lecture> optionalLecture = lectureRepository.findByIdLectureIdWithLock(lectureId);
-        Optional<Student> optionalStudent = lectureRepository.findByIdStudentId(studentId);
-        List<LectureJoin> lectureJoinList = lectureRepository.findAllByStudentIdAndLectureId(lectureId,studentId);
+        Optional<Lecture> optionalLecture = lectureRepository.findByIdLectureIdWithLock(lecture_id);
+        Optional<Student> optionalStudent = lectureRepository.findByIdStudentId(student_id);
+        List<LectureJoin> lectureJoinList = lectureRepository.findAllByStudentIdAndLectureId(lecture_id,student_id);
 
         if(optionalLecture.isEmpty()){
             throw new IllegalArgumentException("해당 강좌는 없는 강좌입니다.");
@@ -49,9 +50,9 @@ public class LectureServiceImpl implements LectureService{
         lectureValidator.validateLectureCapacity(lecture);
         lectureValidator.validateLectureJoin(lectureJoinList);
 
-        // LectureJoin 생성 및 저장
-        Student student = Student.createStudent(studentInfo.getName(),studentInfo.getTotLectureJoin());
-        LectureJoin lectureJoin = LectureJoin.createLectureJoin(student, lecture, StateCd.REGISTERED);
+        LectureJoin lectureJoin = LectureJoin.createLectureJoin(studentInfo, lecture, StateCd.REGISTERED);
+        log.info("hello" + studentInfo.getId() + " " + lecture.getId());
+        log.info("hello" + lectureJoin.getLecture().getId() + " " + lectureJoin.getStudent().getId());
         lectureRepository.saveLectureJoin(lectureJoin);
 
         lecture.increaseCapacity();

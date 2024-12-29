@@ -22,6 +22,7 @@ public class Lecture extends BaseEntity {
     private long currentCapacity;
     private LocalDate lectureDate;
 
+
     @Builder
     public Lecture(String name, String professor, long maxCapacity, long currentCapacity, LocalDate lectureDate) {
         this.name = name;
@@ -30,6 +31,7 @@ public class Lecture extends BaseEntity {
         this.currentCapacity = currentCapacity;
         this.lectureDate = lectureDate;
     }
+
 
     public void increaseCapacity() {
         this.currentCapacity += 1;

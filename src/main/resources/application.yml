@@ -7,14 +7,16 @@ spring:
     username: root
     password: 1234
     driver-class-name: com.mysql.cj.jdbc.Driver
-
   jpa:
-    database-platform: org.hibernate.dialect.MySQL8Dialect
-    hibernate:
-      ddl-auto: update
+    show-sql: true # 콘솔로그로 출력하려면
+    properties:
+      hibernate:
+        format_sql: true # SQL 포맷팅
+        highlight_sql: true # ANSI 코드에 색을 나타낸다
+        use_sql_comments: true # SQL 내부에 /* */ 주석 추가
+        ddl-auto: create
 
-  hibernate:
-    show_sql: true
-    format_sql: true
-    use_sql_comments: true
-    generate_statistics: false
+logging:
+  level:
+    org.hibernate.SQL: debug # logger에 출력하려면
+    org.hibernate.type.descriptor.sql: trace # 파라미터 값 출력

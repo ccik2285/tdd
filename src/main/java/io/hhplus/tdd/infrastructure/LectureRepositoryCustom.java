@@ -10,10 +10,10 @@ import java.util.List;
 import java.util.Optional;
 
 public interface LectureRepositoryCustom {
-    List<LectureJoin> findAllByStudentIdAndLectureId(long studentId, long lectureId);
-    Optional<Lecture> findByIdLectureIdWithLock(long lectureId);
-    Optional<Student> findByIdStudentId(long studentId);
+    List<LectureJoin> findAllByStudentIdAndLectureId(long student_id, long lecture_id);
+    Optional<Lecture> findByIdLectureIdWithLock(long lecture_id);
+    Optional<Student> findByIdStudentId(long student_id);
     void saveLectureJoin(LectureJoin lectureJoin);
     List<Lecture> findByLectureDateAndCurrentCapacityLessThan(LocalDate date, long capacity);
-    List<LectureJoin> findAllByStudentIdAndStateCd(long studentId, StateCd stateCd);
+    List<LectureJoin> findAllByStudentIdAndStateCd(long student_id, StateCd stateCd);
 }
